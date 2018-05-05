@@ -9,7 +9,7 @@ const appRoutes: Routes = [
     {path:'Pessoa', loadChildren: 'app/components/pessoas/pessoas.module#PessoasModule'},
     {path:'Alocacao', loadChildren: 'app/components/alocacao/alocacao.module#AlocacaoModule'},
     {path:'Tarefas', loadChildren: 'app/components/tarefas/tarefas.module#TarefasModule'},
-    {path:'' , redirectTo:'/Alocacao' , pathMatch:'full'},
+    {path:'' , redirectTo:'/Pessoa' , pathMatch:'full'},
 ]
 
 @NgModule({
