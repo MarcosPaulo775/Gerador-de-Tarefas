@@ -1,0 +1,42 @@
+<div class="col">
+	<form>
+
+		<div class="form-group">
+			<label>Nome:</label>
+			<input class="form-control" type="String" name="nome" ngModel>
+		</div>
+		
+		<div class="form-group">
+			<label>Email:</label>
+			<input class="form-control" type="email" name="email" ngModel email>
+		</div>
+		
+		<div>
+			<button class="btn btn-danger">Salvar</button>
+			<button class="btn btn-danger">Resetar</button>
+		</div>
+
+	</form>
+</div>
+
+<br>
+
+<div class="col">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody *ngFor="let pessoa of pessoas">
+			<tr>
+				<td>{{pessoa.nome}}</td>
+				<td>{{pessoa.email}}</td>
+				<td><button class="btn btn" type="button" onclick="remove(sthi)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	
