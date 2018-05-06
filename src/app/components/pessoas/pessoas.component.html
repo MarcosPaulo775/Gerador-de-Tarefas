@@ -1,5 +1,5 @@
-<form [formGroup]="formulario" (NgSubmit)="OnSubmit()">
-	<div class="col">
+<form [formGroup]="formulario" (ngSubmit)="OnSubmit()">
+	<div class="form-group col">
 		<div>
 			<label>Nome:</label>
 			<input type="String" name="nome" ngModel formControlName="nome">
@@ -9,17 +9,16 @@
 			<label>Email:</label>
 			<input type="email" name="email" ngModel formControlName="email">
 		</div>
-		
-		<div>
-			<button type="submit" class="btn btn-danger">Salvar</button>
-			<button class="btn btn-danger">Resetar</button>
-		</div>
+	</div>
+	<div class="form-group col">
+		<button type="submit" class="btn btn-danger">Salvar</button>
+		<button type="reset" class="btn btn-danger">Resetar</button>
 	</div>
 </form>
 
 <br>
 
-<div class="col">
+<div class="form-group col">
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
