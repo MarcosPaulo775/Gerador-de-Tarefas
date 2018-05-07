@@ -10,7 +10,7 @@
 			<input type="email" name="email" ngModel formControlName="email">
 		</div>
 	</div>
-	<div class="form-group col">
+	<div class="form-group col" >
 		<button type="submit" class="btn btn-danger">Salvar</button>
 		<button type="reset" class="btn btn-danger">Resetar</button>
 	</div>
@@ -22,6 +22,7 @@
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
+				<th>Id</th>
 				<th>Nome</th>
 				<th>Email</th>
 				<th>Excluir</th>
@@ -29,6 +30,7 @@
 		</thead>
 		<tbody *ngFor="let pessoa of pessoas">
 			<tr>
+				<td>{{pessoa.id}}</td>
 				<td>{{pessoa.nome}}</td>
 				<td>{{pessoa.email}}</td>
 				<td><button class="btn btn" type="button" onclick="remove(sthi)">X</button></td>

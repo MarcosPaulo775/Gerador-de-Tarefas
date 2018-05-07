@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { Tarefa } from '../../core/model/tarefa';
+import { TarefasService } from '../../core/service/tarefas.service';
 
 @Component({
   selector: 'app-tarefas',
@@ -11,20 +12,42 @@ import { Tarefa } from '../../core/model/tarefa';
 export class TarefasComponent implements OnInit {
 
   formularioTarefas: FormGroup;
+  tarefa: Tarefa;
+  tarefas: Tarefa[];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private tarefasService: TarefasService  
+  ) { }
 
   ngOnInit() {
+    this.tarefas = this.tarefasService.tarefa;
     this.formularioTarefas = this.formBuilder.group({
-      nome: [null],
-      descricao: [null],
-      dateInicio: [null],
-      dateFim: [null]
+      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)] ],
+      descricao: [null, [Validators.required] ],
+      dataInicio: [null, [Validators.required] ],
+      dataFim: [null, [Validators.required] ]
     });
   }
 
   OnSubmit(){
-    console.log(this.formularioTarefas.value);
+    if(this.formularioTarefas.valid){
+			this.tarefa = new Tarefa();
+
+			this.tarefa.id = this.tarefasService.setId(this.tarefas);
+			this.tarefa.nome = this.formularioTarefas.get('nome').value;
+      this.tarefa.descricao = this.formularioTarefas.get('descricao').value;
+      this.tarefa.dataInicio = this.formularioTarefas.get('dataInicio').value;
+      this.tarefa.dataFim = this.formularioTarefas.get('dataFim').value;
+      this.tarefasService.tarefa.push(this.tarefa);
+			console.log("OBJETO:");
+			console.log(this.tarefa);
+			console.log("VETOR:")
+			console.log(this.tarefas);
+		}
+		else{
+			console.log("ERROR");
+		}
   }
 
 }

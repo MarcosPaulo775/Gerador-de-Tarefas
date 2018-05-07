@@ -5,6 +5,7 @@ import { PessoasRoutingModule } from './pessoas.routing';
 import { SharedModule } from '../../shared/shared.module';
 
 import { PessoasComponent } from './pessoas.component';
+import { PessoaService } from '../../core/service/pessoas.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { PessoasComponent } from './pessoas.component';
     PessoasRoutingModule,
     SharedModule
   ],
+  providers: [PessoaService],
   declarations: [PessoasComponent],
 })
 export class PessoasModule { }

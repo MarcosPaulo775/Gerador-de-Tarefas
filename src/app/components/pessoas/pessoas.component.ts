@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { Pessoa } from '../../core/model/pessoa';
+import { PessoaService } from '../../core/service/pessoas.service';
 
 @Component({
 	selector: 'app-pessoas',
@@ -9,26 +10,41 @@ import { Pessoa } from '../../core/model/pessoa';
 	styleUrls: ['./pessoas.component.css']
 })
 export class PessoasComponent implements OnInit {
-
+	
 	formulario: FormGroup;
+	pessoas: Pessoa[];
+	pessoa: Pessoa;
 
-	constructor(private formBuilder: FormBuilder) { }
+	constructor(
+		private formBuilder: FormBuilder,
+		private pessoaService: PessoaService,
+	) {}
 
 	ngOnInit() {
+		this.pessoas = this.pessoaService.pessoa;
 		this.formulario = this.formBuilder.group({
-			nome: [null],
-			email: [null]
+			nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)] ],
+			email: [null, [Validators.required, Validators.email] ]
 		});
 	}
 	
 	OnSubmit(){
-		console.log(this.formulario.value);
+		if(this.formulario.valid){
+			this.pessoa = new Pessoa();
+
+			this.pessoa.id = this.pessoaService.setId(this.pessoas);
+			this.pessoa.nome = this.formulario.get('nome').value;
+			this.pessoa.email = this.formulario.get('email').value;
+			this.pessoaService.pessoa.push(this.pessoa);
+			console.log("OBJETO:");
+			console.log(this.pessoa);
+			console.log("VETOR:")
+			console.log(this.pessoas);
+		}
+		else{
+			console.log("ERROR");
+		}
+
 	}
-	
-	pessoas: Pessoa[] = [ 
-		{ id: 1, nome: "Mr. Nice", email:  "bla@hotmail.com"},
-		{ id: 2, nome: "Marcos", email: "bla@gmail.com"},
-		{ id: 3, nome: "Leonardo", email: "bla@yahoo.com"},
-	 ];
 	
 }

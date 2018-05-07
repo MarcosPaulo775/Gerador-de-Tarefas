@@ -1,3 +1,28 @@
-<p>
-  alocacao works!
-</p>
+
+<div>
+	<label>Tarefas:</label>
+	<select ng-options="item for item in tarefas.nome"></select>
+</div>
+
+<h3>Pessoas Escaladas</h3>
+
+<div class="form-group col">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody *ngFor="let pessoa of alocacao.pessoa">
+			<tr>
+				<td>{{pessoa.id}}</td>
+				<td>{{pessoa.nome}}</td>
+				<td>{{pessoa.descricao}}</td>
+				<td><button class="btn btn" type="button" onclick="remove(sthi)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
