@@ -12,9 +12,9 @@
   <div class="form-group col">
 
       <label>Data:</label>
-      <input type="date" formControlName="dateInicio">
+      <input type="date" formControlName="dataInicio">
       <label>até</label>
-      <input type="date" formControlName="dateFim">
+      <input type="date" formControlName="dataFim">
       
   </div>
 
@@ -29,3 +29,26 @@
     </div>
 
 </form>
+
+<br>
+
+<div class="form-group col">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Descricão</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody *ngFor="let tarefa of tarefas">
+			<tr>
+				<td>{{tarefa.id}}</td>
+				<td>{{tarefa.nome}}</td>
+				<td>{{tarefa.descricao}}</td>
+				<td><button class="btn btn" type="button" onclick="remove(sthi)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
