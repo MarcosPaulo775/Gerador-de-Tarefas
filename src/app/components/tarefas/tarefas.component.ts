@@ -22,6 +22,7 @@ export class TarefasComponent implements OnInit {
 
   ngOnInit() {
     this.tarefas = this.tarefasService.tarefa;
+    
     this.formularioTarefas = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)] ],
       descricao: [null, [Validators.required] ],
@@ -40,6 +41,8 @@ export class TarefasComponent implements OnInit {
       this.tarefa.dataInicio = this.formularioTarefas.get('dataInicio').value;
       this.tarefa.dataFim = this.formularioTarefas.get('dataFim').value;
       this.tarefasService.tarefa.push(this.tarefa);
+      this.tarefasService.setAlocacao(this.tarefa);
+
 			console.log("OBJETO:");
 			console.log(this.tarefa);
 			console.log("VETOR:")

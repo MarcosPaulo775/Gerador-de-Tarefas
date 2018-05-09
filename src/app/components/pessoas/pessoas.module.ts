@@ -13,7 +13,7 @@ import { PessoaService } from '../../core/service/pessoas.service';
     PessoasRoutingModule,
     SharedModule
   ],
-  providers: [PessoaService],
+  providers: [],
   declarations: [PessoasComponent],
 })
 export class PessoasModule { }

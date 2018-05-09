@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 
+import { AlocacaoService } from './alocacao.service';
+
 import { Tarefa } from '../model/tarefa';
 
 @Injectable()
 export class TarefasService{
+
+    constructor(private alocacaoService: AlocacaoService){}
 
     static tarefa: Tarefa[];
 
@@ -15,6 +19,10 @@ export class TarefasService{
             {id: 2, nome: "Lanche", descricao: "Delicia"},
             {id: 3, nome: "Janta", descricao: "Delicia"},
         ]
+    }
+
+    setAlocacao(tarefa: Tarefa){
+        this.alocacaoService.setAlocacao(tarefa);
     }
 
     setId(tarefas: Tarefa[]):Number{

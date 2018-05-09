@@ -6,6 +6,8 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { TarefasComponent } from './tarefas.component';
 import { TarefasService } from '../../core/service/tarefas.service';
+import { AlocacaoService } from '../../core/service/alocacao.service';
+
 
 @NgModule({
   imports: [
@@ -13,7 +15,7 @@ import { TarefasService } from '../../core/service/tarefas.service';
     TarefasRoutingModule,
     SharedModule
   ],
-  providers: [TarefasService],
+  providers: [],
   declarations: [TarefasComponent]
 })
 export class TarefasModule { }
