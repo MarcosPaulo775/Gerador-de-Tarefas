@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 import { Tarefa } from '../../core/model/tarefa';
 import { TarefasService } from '../../core/service/tarefas.service';
+import { AlocacaoService } from '../../core/service/alocacao.service';
 
 @Component({
   selector: 'app-tarefas',
@@ -17,7 +18,8 @@ export class TarefasComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private tarefasService: TarefasService  
+    private tarefasService: TarefasService ,
+    private alocacaoService: AlocacaoService 
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,8 @@ export class TarefasComponent implements OnInit {
       this.tarefa.dataInicio = this.formularioTarefas.get('dataInicio').value;
       this.tarefa.dataFim = this.formularioTarefas.get('dataFim').value;
       this.tarefasService.tarefa.push(this.tarefa);
-      this.tarefasService.setAlocacao(this.tarefa);
+      
+      this.alocacaoService.setAlocacao(this.tarefa);
 
 			console.log("OBJETO:");
 			console.log(this.tarefa);

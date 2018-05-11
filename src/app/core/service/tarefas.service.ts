@@ -15,18 +15,14 @@ export class TarefasService{
 
     getTarefas(): Tarefa[]{
         return [
-            {id: 1, nome: "Almoço", descricao: "Delicia"},
-            {id: 2, nome: "Lanche", descricao: "Delicia"},
-            {id: 3, nome: "Janta", descricao: "Delicia"},
+            {id: 0, nome: "Almoço", descricao: "Delicia"},
+            {id: 1, nome: "Lanche", descricao: "Delicia"},
+            {id: 2, nome: "Janta", descricao: "Delicia"},
         ]
     }
 
-    setAlocacao(tarefa: Tarefa){
-        this.alocacaoService.setAlocacao(tarefa);
-    }
-
-    setId(tarefas: Tarefa[]):Number{
-        return tarefas.length +1;
+    setId(tarefas: Tarefa[]):number{
+        return tarefas.length;
     }
     
 }

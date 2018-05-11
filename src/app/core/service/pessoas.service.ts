@@ -4,20 +4,21 @@ import { Pessoa } from '../model/pessoa';
 import { FormGroup } from '@angular/forms';
 
 @Injectable()
-export class PessoaService{
+export class PessoaService {
 
     static pessoa: Pessoa[];
 
-    pessoa = this.getPessoas();
-    
-    setId(pessoas: Pessoa[]):Number{
-        return pessoas.length +1;
+    pessoa = new Array<Pessoa>();
+
+    setId(pessoas: Pessoa[]): number {
+        return pessoas.length;
     }
-    
-    getPessoas():Pessoa[]{
-        return [
-            {id: 1, nome: "Marcos", email: "marcos@abc.com"},
-            {id: 2, nome: "abc", email: "ad3@xx.com"},
-        ];
+
+    procuraPessoa(x: number): Pessoa {
+
+        for (let i = 0; i < this.pessoa.length; i++) {
+            if (x == this.pessoa[i].id)
+                return this.pessoa[i];
+        }
     }
 }

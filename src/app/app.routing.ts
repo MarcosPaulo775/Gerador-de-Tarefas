@@ -5,7 +5,6 @@ import { Routes  , RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
-    //{path:'Alocacao' , component: AlocacaoComponent , outlet:'popup'},
     {path:'Pessoa', loadChildren: 'app/components/pessoas/pessoas.module#PessoasModule'},
     {path:'Alocacao', loadChildren: 'app/components/alocacao/alocacao.module#AlocacaoModule'},
     {path:'Tarefas', loadChildren: 'app/components/tarefas/tarefas.module#TarefasModule'},

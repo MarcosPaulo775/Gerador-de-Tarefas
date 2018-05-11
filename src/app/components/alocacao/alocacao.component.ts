@@ -22,15 +22,8 @@ export class AlocacaoComponent implements OnInit {
   alocacao: PessoaTarefa[];
   pessoas: Pessoa[];
 
-  alocacaoCriada: PessoaTarefa;
-
-  tarefaSelecionada: Tarefa;
   alocacaoSelecionada: PessoaTarefa;
   pessoaAdd: Pessoa;
-
-  aloc: PessoaTarefa;
-
-  GPS: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,42 +44,50 @@ export class AlocacaoComponent implements OnInit {
     });
     this.alocacao = this.alocacaoService.pessoaTarefa;
   }
-  
-  OnSubmit(){
-    this.alocacaoCriada = new PessoaTarefa;
-    //
-    var x = this.procuraAlocacao(this.formularioAlocacao.get('selectTarefa').value);
-    this.pessoaAdd = new Pessoa;
+
+
+  OnSubmit(): void{
+    
+    this.pessoaAdd = this.selectPessoa();
+
+    if(!this.alocacaoService.isPessoaEscalada(this.pessoaAdd.id)){
+      this.alocacaoSelecionada.pessoa.push(this.pessoaAdd);
+    }else{
+      alert("ESTÁ PESSOA JÁ ESTAVA ALOCADA!!");
+    }
+
+    console.log("Alocacao Atualizada:");
+    console.log(this.alocacaoSelecionada);
+    
+
+  }
+
+  selectAlocacao(){
+
     this.alocacaoSelecionada = new PessoaTarefa;
 
-    this.pessoaAdd = this.formularioAlocacao.get('selectPessoa').value;
-    this.alocacaoService.pessoaTarefa[x].pessoa.push(this.pessoaAdd);
+    var x = this.formularioAlocacao.get('selectTarefa').value;
+    this.alocacaoSelecionada = this.alocacaoService.procuraAlocacao(x);
 
-    this.alocacaoSelecionada.pessoa.push(this.pessoaAdd);//Agora Vai!
-  
-    //
-    this.alocacaoCriada = this.alocacaoService.x(this.alocacaoCriada);
-    this.alocacaoCriada.id = this.alocacaoService.setId(this.alocacaoService.pessoaTarefa);
-    this.alocacaoCriada.pessoa.push(this.formularioAlocacao.get('selectPessoa').value);
-    this.alocacaoCriada.tarefa = this.formularioAlocacao.get('selectTarefa').value;
+    this.alocacaoService.alocacaoSelecionada = this.alocacaoSelecionada;
 
-    this.alocacaoService.pessoaTarefa.push(this.alocacaoCriada);
-
-    this.tarefaSelecionada = this.formularioAlocacao.get('selectTarefa').value;
-    console.log("Alocacao Selecionaddawdwada:");
-    console.log(this.tarefaSelecionada);
     console.log("Alocacao Selecionada:");
-    console.log(this.tarefaSelecionada);
-  
+    console.log(this.alocacaoSelecionada);
+
   }
-  
-  procuraAlocacao(x: Tarefa):number{
-    for(let i=0; i<this.alocacaoService.pessoaTarefa.length; i++){
-      if(x == this.alocacaoService.pessoaTarefa[i].tarefa)
-        this.GPS = i;
-    }
-    return this.GPS;
-    
+
+  selectPessoa(): Pessoa{
+
+    this.pessoaAdd = new Pessoa;
+
+    var x = this.formularioAlocacao.get('selectPessoa').value;
+    this.pessoaAdd = this.pessoaService.procuraPessoa(x);
+
+    console.log("Pessoa Selecionada:");
+    console.log(this.pessoaAdd);
+
+    return this.pessoaAdd;
+
   }
 
 }
