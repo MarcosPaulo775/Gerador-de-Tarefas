@@ -1,45 +1,57 @@
 <form [formGroup]="formularioAlocacao" (ngSubmit)="OnSubmit()">
 
 	<div class="input-group mb-3">
+
 		<div class="input-group-prepend">
-		  <label class="input-group-text" for="inputGroupSelect01">Tarefa</label>
+			<label class="input-group-text" for="inputGroupSelect01">Tarefa</label>
 		</div>
 		<select class="custom-select" id="inputGroupSelect01" formControlName="selectTarefa">
-		  <option selected>Choose...</option>
-		  <option *ngFor="let tarefa of tarefas" value={{tarefa}}>{{tarefa.nome}}</option>
+			<option selected>Choose...</option>
+			<option *ngFor="let tarefa of tarefas" value={{tarefa.id}}>{{tarefa.nome}}</option>
 		</select>
+		<button type="button" (click)="selectAlocacao()">Search</button>
+
+	</div>
+
+	<div *ngIf="this.alocacaoSelecionada">
+		<div class="input-group-prepend">
+			<label class="input-group-text" for="inputGroupSelect01">Pessoa</label>
 		</div>
-		<div *ngIf="this.formularioAlocacao.get('selectTarefa').value">
-			<div class="input-group-prepend">
-				<label class="input-group-text" for="inputGroupSelect01">Pessoa</label>
+		<select class="custom-select" id="inputGroupSelect02" formControlName="selectPessoa">
+			<option selected>Choose...</option>
+			<option *ngFor="let pessoa of pessoas" value={{pessoa.id}}>{{pessoa.nome}}</option>
+		</select>
+		<button class="btn btn-danger" type="submit">Adicionar</button>
+		<button class="btn btn-danger" type="reset">Resetar</button>
+
+
+		<div *ngIf="this.alocacaoSelecionada.pessoa[0]">
+
+			<div class="form-group col">
+				<h3>Pessoas Escaladas</h3>
+
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th>Id</th>
+							<th>Pessoa</th>
+							<th>Excluir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let x of this.alocacaoSelecionada.pessoa">
+							<td>{{x.id}}</td>
+							<td>{{x.nome}}</td>
+							<td>
+								<button class="btn btn" type="button" onclick="remove(sthi)">X</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<select class="custom-select" id="inputGroupSelect02" formControlName="selectPessoa">
-				<option selected>Choose...</option>
-				<option *ngFor="let pessoa of pessoas" value={{pessoa}}>{{pessoa.nome}}</option>
-			</select>
-			<button class="btn btn-danger" type="submit">Adicionar</button>
-			<button class="btn btn-danger" type="reset">Resetar</button>
+
 		</div>
 
+	</div>
 
 </form>
-
-<div class="form-group col">
-	<h3>Pessoas Escaladas</h3>
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<th>Id</th>
-				<th>Pessoa</th>
-				<th>Excluir</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let a of alocacao">
-				<td>{{a.id}}</td>
-				<td>{{a.pessoa.nome}}</td>
-				<td><button class="btn btn" type="button" onclick="remove(sthi)">X</button></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
