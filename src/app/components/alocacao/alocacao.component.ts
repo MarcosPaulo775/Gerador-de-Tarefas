@@ -6,7 +6,7 @@ import { PessoaService } from '../../core/service/pessoas.service';
 
 import { PessoaTarefa } from '../../core/model/pessoa-tarefa';
 import { Tarefa } from '../../core/model/tarefa';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Pessoa } from '../../core/model/pessoa';
 
 @Component({
@@ -32,37 +32,38 @@ export class AlocacaoComponent implements OnInit {
     private pessoaService: PessoaService
   ) { }
 
-  
+
   ngOnInit() {
     this.alocacao = this.alocacaoService.pessoaTarefa;
     this.tarefas = this.tarefaService.tarefa;
     this.pessoas = this.pessoaService.pessoa;
     console.log(this.tarefas);
     this.formularioAlocacao = this.formBuilder.group({
-      selectTarefa: [null],
-      selectPessoa: [null],
+      selectTarefa: [null, [Validators.required]],
+      selectPessoa: [null, [Validators.required]],
     });
     this.alocacao = this.alocacaoService.pessoaTarefa;
   }
 
 
-  OnSubmit(): void{
-    
+  OnSubmit(): void {
+
     this.pessoaAdd = this.selectPessoa();
 
-    if(!this.alocacaoService.isPessoaEscalada(this.pessoaAdd.id)){
+    if (!this.alocacaoService.isPessoaEscalada(this.pessoaAdd.id)) {
       this.alocacaoSelecionada.pessoa.push(this.pessoaAdd);
-    }else{
+      this.formularioAlocacao.get('selectPessoa').reset();
+    } else {
       alert("ESTÁ PESSOA JÁ ESTAVA ALOCADA!!");
     }
 
     console.log("Alocacao Atualizada:");
     console.log(this.alocacaoSelecionada);
-    
+
 
   }
 
-  selectAlocacao(){
+  selectAlocacao() {
 
     this.alocacaoSelecionada = new PessoaTarefa;
 
@@ -76,7 +77,7 @@ export class AlocacaoComponent implements OnInit {
 
   }
 
-  selectPessoa(): Pessoa{
+  selectPessoa(): Pessoa {
 
     this.pessoaAdd = new Pessoa;
 

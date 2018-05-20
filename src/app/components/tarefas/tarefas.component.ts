@@ -37,19 +37,26 @@ export class TarefasComponent implements OnInit {
     if(this.formularioTarefas.valid){
 			this.tarefa = new Tarefa();
 
-			this.tarefa.id = this.tarefasService.setId(this.tarefas);
+      this.tarefa.id = this.tarefasService.setId(this.tarefas);
 			this.tarefa.nome = this.formularioTarefas.get('nome').value;
       this.tarefa.descricao = this.formularioTarefas.get('descricao').value;
       this.tarefa.dataInicio = this.formularioTarefas.get('dataInicio').value;
       this.tarefa.dataFim = this.formularioTarefas.get('dataFim').value;
-      this.tarefasService.tarefa.push(this.tarefa);
       
-      this.alocacaoService.setAlocacao(this.tarefa);
-
+      if(!this.tarefasService.tarefaExiste(this.tarefa)){
+        this.tarefasService.tarefa.push(this.tarefa);
+        this.formularioTarefas.reset();
+        this.alocacaoService.setAlocacao(this.tarefa);
+      }
+      else {
+				alert("Está tarefa já está cadastrada!");
+			}
+      /*
 			console.log("OBJETO:");
 			console.log(this.tarefa);
 			console.log("VETOR:")
-			console.log(this.tarefas);
+      console.log(this.tarefas);
+      */
 		}
 		else{
 			console.log("ERROR");

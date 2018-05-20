@@ -5,9 +5,9 @@ import { Routes  , RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
-    {path:'Pessoa', loadChildren: 'app/components/pessoas/pessoas.module#PessoasModule'},
-    {path:'Alocacao', loadChildren: 'app/components/alocacao/alocacao.module#AlocacaoModule'},
-    {path:'Tarefas', loadChildren: 'app/components/tarefas/tarefas.module#TarefasModule'},
+    {path:'Pessoa', loadChildren: './components/pessoas/pessoas.module#PessoasModule'},
+    {path:'Alocacao', loadChildren: './components/alocacao/alocacao.module#AlocacaoModule'},
+    {path:'Tarefas', loadChildren: './components/tarefas/tarefas.module#TarefasModule'},
     {path:'' , redirectTo:'/Pessoa' , pathMatch:'full'},
 ]
 

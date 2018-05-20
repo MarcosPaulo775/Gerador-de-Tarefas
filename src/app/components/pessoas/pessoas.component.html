@@ -1,27 +1,43 @@
-<form [formGroup]="formulario" (ngSubmit)="OnSubmit()">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
+<dt class="form-group col ">
+	Lista de Pessoas
+</dt>
+
+
+<form [formGroup]="formulario">
 	<div class="form-group col">
 		<div>
 			<label>Nome:</label>
-			<input type="String" name="nome" formControlName="nome">
+			<input type="String" class="form-control" name="nome" formControlName="nome">
 		</div>
-		
+
 		<div>
 			<label>Email:</label>
-			<input type="email" name="email" formControlName="email">
+			<input type="email" class="form-control" name="email" formControlName="email">
 		</div>
 	</div>
-	<div class="form-group col" >
-		<button type="submit" class="btn btn-danger">Salvar</button>
-		<button type="reset" class="btn btn-danger">Resetar</button>
+	<div class="form-row col">
+		<div class="col-10"></div>
+		<div class="col-1">
+			<button type="button" (click)="OnSubmit()" class="btn btn-primary">Salvar</button>
+		</div>
+		<div class="col-1">
+			<button type="reset" class="btn btn-primary">Resetar</button>
+		</div>
 	</div>
 </form>
 
 <br>
 
 <div class="form-group col">
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
+	<table class="table table-striped">
+		<thead class="bg-dark">
+			<tr class="text-white">
 				<th>Id</th>
 				<th>Nome</th>
 				<th>Email</th>
@@ -33,9 +49,10 @@
 				<td>{{pessoa.id}}</td>
 				<td>{{pessoa.nome}}</td>
 				<td>{{pessoa.email}}</td>
-				<td><button class="btn btn" type="button" onclick="remove(sthi)">X</button></td>
+				<td>
+					<button class="btn btn" type="button" (click)="remove(pessoa)">X</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
-	

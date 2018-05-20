@@ -1,28 +1,44 @@
-<form [formGroup]="formularioAlocacao" (ngSubmit)="OnSubmit()">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<dt class="form-group col ">
+	Lista de Alocações
+</dt>
+
+<form [formGroup]="formularioAlocacao ">
 
 	<div class="input-group mb-3">
 
 		<div class="input-group-prepend">
 			<label class="input-group-text" for="inputGroupSelect01">Tarefa</label>
 		</div>
-		<select class="custom-select" id="inputGroupSelect01" formControlName="selectTarefa">
-			<option selected>Choose...</option>
+		<select class="custom-select" id="inputGroupSelect01" formControlName="selectTarefa" (change)="selectAlocacao()">
+			<option selected>Selecione...</option>
 			<option *ngFor="let tarefa of tarefas" value={{tarefa.id}}>{{tarefa.nome}}</option>
 		</select>
-		<button type="button" (click)="selectAlocacao()">Search</button>
-
 	</div>
 
-	<div *ngIf="this.alocacaoSelecionada">
+	<div *ngIf="this.formularioAlocacao.get('selectTarefa').valid">
 		<div class="input-group-prepend">
-			<label class="input-group-text" for="inputGroupSelect01">Pessoa</label>
+			<label class="input-group-text" for="inputGroupSelect02">Pessoa</label>
 		</div>
 		<select class="custom-select" id="inputGroupSelect02" formControlName="selectPessoa">
-			<option selected>Choose...</option>
+			<option selected>Selecione...</option>
 			<option *ngFor="let pessoa of pessoas" value={{pessoa.id}}>{{pessoa.nome}}</option>
 		</select>
-		<button class="btn btn-danger" type="submit">Adicionar</button>
-		<button class="btn btn-danger" type="reset">Resetar</button>
+
+		<div class="form-row col">
+			<div class="col-10"></div>
+			<div class="col-1">
+				<button type="button" (click)="OnSubmit()" class="btn btn-primary">Salvar</button>
+			</div>
+			<div class="col-1">
+				<button type="reset" class="btn btn-primary">Resetar</button>
+			</div>
+		</div>
+
 
 
 		<div *ngIf="this.alocacaoSelecionada.pessoa[0]">
@@ -30,9 +46,9 @@
 			<div class="form-group col">
 				<h3>Pessoas Escaladas</h3>
 
-				<table class="table">
-					<thead class="thead-dark">
-						<tr>
+				<table class="table table-striped">
+					<thead class="bg-primary">
+						<tr class="text-white">
 							<th>Id</th>
 							<th>Pessoa</th>
 							<th>Excluir</th>

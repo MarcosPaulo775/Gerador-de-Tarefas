@@ -21,4 +21,14 @@ export class PessoaService {
                 return this.pessoa[i];
         }
     }
+
+    pessoaExiste(x: Pessoa): boolean {
+        for (var i = 0; i < this.pessoa.length; i++) {
+            if (x.nome == this.pessoa[i].nome && x.email == this.pessoa[i].email) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
